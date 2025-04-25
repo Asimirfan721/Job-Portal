@@ -2,7 +2,7 @@
 <html class="no-js" lang="en_AU" />
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>CareerVibe | Find Best Jobs</title>
+	<title>Registeration</title>
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
 	<meta name="HandheldFriendly" content="True" />
@@ -53,7 +53,6 @@
                 <button type="submit" class="btn btn-primary mx-3">Update</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
-            
         </form>
       </div>
     </div>
@@ -72,5 +71,7 @@
 <script src="{{ asset('assets/js/slick.min.js') }}"></script>
 <script src="{{ asset('assets/js/lightbox.min.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+@yield('customJs')
 </body>
 </html>

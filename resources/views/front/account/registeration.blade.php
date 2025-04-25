@@ -8,7 +8,7 @@
             <div class="col-md-5">
                 <div class="card shadow border-0 p-5">
                     <h1 class="h3">Register</h1>
-                    <form action="">
+                    <form action=""name="registerationForm" id="registerationForm">
                         <div class="mb-3">
                             <label for="" class="mb-2">Name*</label>
                             <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name">
@@ -19,11 +19,11 @@
                         </div> 
                         <div class="mb-3">
                             <label for="" class="mb-2">Password*</label>
-                            <input type="password" name="name" id="name" class="form-control" placeholder="Enter Password">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
                         </div> 
                         <div class="mb-3">
                             <label for="" class="mb-2">Confirm Password*</label>
-                            <input type="password" name="name" id="name" class="form-control" placeholder="Enter Password">
+                            <input type="password" name="confirm_password" id="confrim_password" class="form-control" placeholder="Please confirm Password">
                         </div> 
                         <button class="btn btn-primary mt-2">Register</button>
                     </form>                    
@@ -35,4 +35,10 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('customJs')
+<script>
+
+</script>
 @endsection
