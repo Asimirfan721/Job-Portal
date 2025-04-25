@@ -39,6 +39,8 @@
 
 @section('customJs')
 <script>
-
+$("#registerationForm").submit(function(){
+    e.preventDefault();
+})
 </script>
 @endsection
