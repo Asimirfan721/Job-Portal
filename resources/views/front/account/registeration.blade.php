@@ -37,10 +37,18 @@
 </section>
 @endsection
 
-@section('customJs')
+@section('customJs')    
 <script>
 $("#registerationForm").submit(function(){
     e.preventDefault();
-})
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: $("#registerationForm").serializeArray(),
+        dataType: 'json',
+        success: function(response)  
+    
+    });
+});
 </script>
 @endsection
