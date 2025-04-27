@@ -11,7 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        // migration for jobs table
+        Schema::create('jobs', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('company');
+            $table->string('location');
+            $table->text('description');
+            $table->string('type');
+            $table->string('salary');
+            $table->timestamps();
+        });
     }
 
     /**
