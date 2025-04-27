@@ -25,9 +25,9 @@ class AccountController extends Controller
 
         }
         else {
-            return response()->json([
-                'status' => false,
-                'errors' => $validator->errors()
+            return response()->json([   // response in json format
+                'status' => false, // status false
+                'errors' => $validator->errors() // errors
             ]);
         }
     }
