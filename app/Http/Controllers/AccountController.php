@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 class AccountController extends Controller
 {
     public function Registeration(){
-        return view('front.account.registeration'); //registeration view is in front folder in acccount folder
+        return view('front.account.registeration'); //registeration view is in front folder in acccount folder is empty
 
     }
 
