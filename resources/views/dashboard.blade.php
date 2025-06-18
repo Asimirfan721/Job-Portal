@@ -1,5 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
+        <a href="{{ url('/') }}">
+    <button class="bg-gradient-to-r from-indigo-500 to-blue-400 text-white px-5 py-2 rounded-lg font-semibold shadow hover:from-indigo-600 hover:to-blue-500 transition">
+        Home
+    </button>
+</a>
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
         </h2>
