@@ -24,4 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 });
 
+Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy');
+
+
 require __DIR__.'/auth.php';

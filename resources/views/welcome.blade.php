@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
-            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            background: linear-gradient(135deg, #c5c2ec 0%, #dfeee6 100%);
         }
         .job-card {
             background: #fff;
@@ -22,8 +22,8 @@
             box-shadow: 0 8px 32px 0 rgba(80, 112, 255, 0.16);
         }
         .category-badge {
-            background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
-            color: #fff;
+            background: linear-gradient(90deg, #d5d5f3 0%, #60a5fa 100%);
+            color: #910404;
             border-radius: 9999px;
             padding: 0.25rem 0.75rem;
             font-size: 0.875rem;
@@ -39,6 +39,7 @@
             <svg class="w-8 h-8 text-indigo-600" fill="none" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><text x="16" y="22" text-anchor="middle" fill="#fff" font-size="16" font-family="Arial" font-weight="bold">JP</text></svg>
             <span class="text-xl font-bold text-indigo-700 tracking-wide">Job Portal</span>
         </div>
+        
         @if (Route::has('login'))
             <nav class="flex items-center gap-4">
                 @auth
@@ -50,13 +51,15 @@
                             Post a Job
                         </button>
                     </a>
+                    
+
                 @endauth
             </nav>
         @endif
     </header>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col items-center justify-start pt-32 pb-12 px-4 bg-gradient-to-br from-indigo-50 via-white to-blue-50 min-h-screen">
+    <main class="flex-1 flex flex-col items-center justify-start pt-32 pb-12 px-4 min-h-screen">
         <section class="w-full max-w-2xl text-center mb-10">
             <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-800 mb-3 drop-shadow">Find Your Next Opportunity</h1>
             <p class="text-lg text-indigo-500 mb-2">Browse the latest job postings and kickstart your career!</p>
@@ -76,6 +79,15 @@
                         <span>Posted: {{ $job->created_at->diffForHumans() }}</span>
                         <span>Job ID: #{{ $job->id }}</span>
                     </div>
+                    @auth
+                        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" class="mt-2" onsubmit="return confirm('Are you sure you want to delete this job?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700">
+                                Delete
+                            </button>
+                        </form>
+                    @endauth
                 </div>
             @empty
                 <div class="job-card p-8 text-center border border-indigo-100">
