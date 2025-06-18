@@ -30,6 +30,12 @@
                         >
                             Dashboard
                         </a>
+                        <a href="{{ route('jobs.create') }}">
+    <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+        Post a Job
+    </button>
+</a>
+
                     @else
                         <a
                             href="{{ route('login') }}"
