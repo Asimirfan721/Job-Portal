@@ -31,7 +31,8 @@ public function store(Request $request)
         'category_id' => $request->category_id,
     ]);
 
-    return redirect()->route('dashboard')->with('success', 'Job Posted Successfully!');
+   return redirect('/')->with('success', 'Job Posted Successfully!');
+
 }
 
 

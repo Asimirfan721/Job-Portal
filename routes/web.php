@@ -3,9 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
+use App\Models\Job;
 
 Route::get('/', function () {
-    return view('welcome');
+    $jobs = Job::latest()->get(); // You can also use paginate()
+    return view('welcome', compact('jobs'));
 });
 
 Route::get('/dashboard', function () {
