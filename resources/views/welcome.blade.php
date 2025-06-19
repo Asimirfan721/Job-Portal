@@ -39,23 +39,29 @@
             <svg class="w-8 h-8 text-indigo-600" fill="none" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><text x="16" y="22" text-anchor="middle" fill="#fff" font-size="16" font-family="Arial" font-weight="bold">JP</text></svg>
             <span class="text-xl font-bold text-indigo-700 tracking-wide">Job Portal</span>
         </div>
-        
-        @if (Route::has('login'))
-            <nav class="flex items-center gap-4">
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="px-5 py-2 rounded-lg font-medium text-indigo-700 border border-indigo-200 hover:bg-indigo-50 transition">
-                        Dashboard
-                    </a>
-                    <a href="{{ route('jobs.create') }}">
-                        <button class="bg-gradient-to-r from-indigo-500 to-blue-400 text-white px-5 py-2 rounded-lg font-semibold shadow hover:from-indigo-600 hover:to-blue-500 transition">
-                            Post a Job
-                        </button>
-                    </a>
-                    
-
-                @endauth
-            </nav>
-        @endif
+        <div class="flex items-center gap-4">
+            @if (Route::has('login'))
+                <nav class="flex items-center gap-4">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="px-5 py-2 rounded-lg font-medium text-indigo-700 border border-indigo-200 hover:bg-indigo-50 transition">
+                            Dashboard
+                        </a>
+                        <a href="{{ route('jobs.create') }}">
+                            <button class="bg-gradient-to-r from-indigo-500 to-blue-400 text-white px-5 py-2 rounded-lg font-semibold shadow hover:from-indigo-600 hover:to-blue-500 transition">
+                                Post a Job
+                            </button>
+                        </a>
+                    @endauth
+                </nav>
+            @endif
+            @guest
+                <a href="{{ route('register') }}">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg shadow font-semibold">
+                        Register Yourself Here
+                    </button>
+                </a>
+            @endguest
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -69,12 +75,11 @@
             @forelse($jobs as $job)
                 <div class="job-card p-6 flex flex-col gap-2 border border-indigo-100">
                     <div class="flex items-center justify-between">
-                      <h3 class="text-2xl font-semibold text-indigo-700">
-    <a href="{{ route('jobs.show', $job->id) }}" class="hover:underline">
-        {{ $job->title }}
-    </a>
-</h3>
-
+                        <h3 class="text-2xl font-semibold text-indigo-700">
+                            <a href="{{ route('jobs.show', $job->id) }}" class="hover:underline">
+                                {{ $job->title }}
+                            </a>
+                        </h3>
                         @if($job->category)
                             <span class="category-badge">{{ $job->category->name }}</span>
                         @endif
@@ -84,21 +89,18 @@
                         <span>Posted: {{ $job->created_at->diffForHumans() }}</span>
                         <span>Job ID: #{{ $job->id }}</span>
                     </div>
-                  @auth
-    @php $user = Auth::user(); @endphp
-
-    @if(($user->role === 'admin') || ($user->role === 'employer' && $job->user_id === $user->id))
-        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="text-red-600 hover:text-red-800 font-semibold">
-                Delete
-            </button>
-        </form>
-    @endif
-@endauth
-
-
+                    @auth
+                        @php $user = Auth::user(); @endphp
+                        @if(($user->role === 'admin') || ($user->role === 'employer' && $job->user_id === $user->id))
+                            <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-800 font-semibold">
+                                    Delete
+                                </button>
+                            </form>
+                        @endif
+                    @endauth
                 </div>
             @empty
                 <div class="job-card p-8 text-center border border-indigo-100">
