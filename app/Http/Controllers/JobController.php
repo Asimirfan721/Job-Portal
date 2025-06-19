@@ -34,6 +34,12 @@ public function store(Request $request)
    return redirect('/')->with('success', 'Job Posted Successfully!');
 
 }
+ public function destroy(Job $job)
+{
+    $job->delete();
+
+    return redirect('/')->with('success', 'Job deleted successfully!');
+}
 
 
 
