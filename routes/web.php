@@ -7,6 +7,7 @@ use App\Models\Job;
 
 Route::get('/', function () {
     $jobs = Job::latest()->get(); // You can also use paginate()
+      $jobs = Job::with('category')->latest()->get(); // important: with('category')
     return view('welcome', compact('jobs'));
 });
 
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
     Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
+    Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy');
+
 });
 
 require __DIR__.'/auth.php';
