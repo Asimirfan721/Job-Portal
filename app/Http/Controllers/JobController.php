@@ -24,28 +24,37 @@ public function store(Request $request)
         'title' => 'required',
         'description' => 'required',
         'category_id' => 'required|exists:categories,id',
+         
     ]);
 
     Job::create([
         'title' => $request->title,
         'description' => $request->description,
         'category_id' => $request->category_id,
+         'user_id' => Auth::id(), // ✅ Save employer ID
     ]);
 
    return redirect('/')->with('success', 'Job Posted Successfully!');
 
 }
- public function destroy(Job $job)
+public function destroy(Job $job)
 {
-    if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'employer') {
-        abort(403, 'Unauthorized action.');
+    $user = Auth::user();
+
+    // Admins can delete any job
+    if ($user->role === 'admin') {
+        $job->delete();
+        return redirect('/')->with('success', 'Job deleted by admin.');
     }
 
-    $job->delete();
+    // Employers can only delete their own jobs
+    if ($user->role === 'employer' && $job->user_id === $user->id) {
+        $job->delete();
+        return redirect('/')->with('success', 'Job deleted.');
+    }
 
-    return redirect('/')->with('success', 'Job deleted successfully!');
+    abort(403, 'Unauthorized action.');
 }
-
 public function show($id)
 {
     $job = Job::with('category')->findOrFail($id);

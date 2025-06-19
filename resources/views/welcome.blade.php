@@ -84,11 +84,11 @@
                         <span>Posted: {{ $job->created_at->diffForHumans() }}</span>
                         <span>Job ID: #{{ $job->id }}</span>
                     </div>
-                    @auth
+                  @auth
     @php $user = Auth::user(); @endphp
 
-    @if($user->role === 'admin' || $user->role === 'employer')
-        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
+    @if(($user->role === 'admin') || ($user->role === 'employer' && $job->user_id === $user->id))
+        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
             @csrf
             @method('DELETE')
             <button type="submit" class="text-red-600 hover:text-red-800 font-semibold">
@@ -97,6 +97,7 @@
         </form>
     @endif
 @endauth
+
 
                 </div>
             @empty

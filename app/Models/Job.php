@@ -9,7 +9,7 @@ class Job extends Model
     use HasFactory;
 
     // ✅ Add this line to allow mass assignment
-    protected $fillable = ['title', 'description', 'category_id'];
+    protected $fillable = ['title', 'description', 'category_id', 'user_id'];
 
     public function category()
 {
