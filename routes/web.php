@@ -31,7 +31,22 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
- 
+ // Admin Only
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin-panel', [JobController::class, 'index']);
+});
+
+// Employer + Admin
+Route::middleware(['auth', 'role:admin,employer'])->group(function () {
+    Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
+    Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
+});
+
+// Job Seeker Only
+Route::middleware(['auth', 'role:job_seeker'])->group(function () {
+    Route::get('/apply/{id}', [JobController::class, 'apply'])->name('jobs.apply');
+    Route::post('/apply/{id}', [JobController::class, 'submitApplication'])->name('applications.submit');
+});
 
 
 require __DIR__.'/auth.php';

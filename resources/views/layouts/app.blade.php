@@ -26,6 +26,20 @@
                     </div>
                 </header>
             @endisset
+            @auth
+    @if(Auth::user()->role === 'admin')
+        <a href="/admin-panel">Admin Panel</a>
+    @endif
+
+    @if(Auth::user()->role === 'employer')
+        <a href="{{ route('jobs.create') }}">Post a Job</a>
+    @endif
+
+    @if(Auth::user()->role === 'job_seeker')
+        <a href="/my-applications">My Applications</a>
+    @endif
+@endauth
+
 
             <!-- Page Content -->
             <main>
