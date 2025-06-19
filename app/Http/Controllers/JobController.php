@@ -40,6 +40,31 @@ public function store(Request $request)
 
     return redirect('/')->with('success', 'Job deleted successfully!');
 }
+public function show($id)
+{
+    $job = Job::with('category')->findOrFail($id);
+    return view('jobs.show', compact('job'));
+}
+
+public function apply($id)
+{
+    $job = Job::findOrFail($id);
+    return view('jobs.apply', compact('job'));
+}
+public function submitApplication(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'resume' => 'required|mimes:pdf,doc,docx|max:2048',
+    ]);
+
+    $resumePath = $request->file('resume')->store('resumes');
+
+    // Save to DB or send email — for now, just show success
+    return back()->with('success', 'Application submitted successfully!');
+}
+
 
 
 

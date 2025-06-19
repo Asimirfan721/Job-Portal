@@ -24,6 +24,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
     Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
     Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy');
+    Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobs.show');
+    Route::get('/jobs/{id}/apply', [JobController::class, 'apply'])->name('jobs.apply');
+Route::post('/jobs/{id}/apply', [JobController::class, 'submitApplication'])->name('jobs.submitApplication');
+
+
 
 });
 

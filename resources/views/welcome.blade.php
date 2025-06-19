@@ -69,7 +69,12 @@
             @forelse($jobs as $job)
                 <div class="job-card p-6 flex flex-col gap-2 border border-indigo-100">
                     <div class="flex items-center justify-between">
-                        <h3 class="text-2xl font-semibold text-indigo-700">{{ $job->title }}</h3>
+                      <h3 class="text-2xl font-semibold text-indigo-700">
+    <a href="{{ route('jobs.show', $job->id) }}" class="hover:underline">
+        {{ $job->title }}
+    </a>
+</h3>
+
                         @if($job->category)
                             <span class="category-badge">{{ $job->category->name }}</span>
                         @endif
