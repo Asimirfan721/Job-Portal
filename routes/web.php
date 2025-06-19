@@ -31,21 +31,21 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
- // Admin Only
+ 
+// Only admin can access
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin-panel', [JobController::class, 'index']);
+    Route::get('/admin-panel', [JObController::class, 'index']);
 });
 
-// Employer + Admin
+// Admin and Employer
 Route::middleware(['auth', 'role:admin,employer'])->group(function () {
-    Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
-    Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
+    Route::get('/post-job', [JobController::class, 'create'])->name('jobs.create');
+    Route::post('/post-job', [JobController::class, 'store'])->name('jobs.store');
 });
 
-// Job Seeker Only
+// Only Job Seekers
 Route::middleware(['auth', 'role:job_seeker'])->group(function () {
-    Route::get('/apply/{id}', [JobController::class, 'apply'])->name('jobs.apply');
-    Route::post('/apply/{id}', [JobController::class, 'submitApplication'])->name('applications.submit');
+    Route::get('/my-applications', [JobController::class, 'index']);
 });
 
 

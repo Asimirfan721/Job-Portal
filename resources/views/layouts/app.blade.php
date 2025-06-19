@@ -18,6 +18,23 @@
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
 
+            <!-- Role-based quick links -->
+            @auth
+                <nav class="flex gap-4 p-4 bg-white shadow mb-4">
+                    @if(Auth::user()->role === 'admin')
+                        <a href="/admin-panel" class="text-indigo-700 font-semibold hover:underline">Admin Panel</a>
+                    @endif
+
+                    @if(Auth::user()->role === 'employer')
+                        <a href="{{ route('jobs.create') }}" class="text-indigo-700 font-semibold hover:underline">Post a Job</a>
+                    @endif
+
+                    @if(Auth::user()->role === 'job_seeker')
+                        <a href="/my-applications" class="text-indigo-700 font-semibold hover:underline">My Applications</a>
+                    @endif
+                </nav>
+            @endauth
+
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white dark:bg-gray-800 shadow">
@@ -26,20 +43,6 @@
                     </div>
                 </header>
             @endisset
-            @auth
-    @if(Auth::user()->role === 'admin')
-        <a href="/admin-panel">Admin Panel</a>
-    @endif
-
-    @if(Auth::user()->role === 'employer')
-        <a href="{{ route('jobs.create') }}">Post a Job</a>
-    @endif
-
-    @if(Auth::user()->role === 'job_seeker')
-        <a href="/my-applications">My Applications</a>
-    @endif
-@endauth
-
 
             <!-- Page Content -->
             <main>
