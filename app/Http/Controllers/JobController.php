@@ -37,10 +37,15 @@ public function store(Request $request)
 }
  public function destroy(Job $job)
 {
+    if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'employer') {
+        abort(403, 'Unauthorized action.');
+    }
+
     $job->delete();
 
     return redirect('/')->with('success', 'Job deleted successfully!');
 }
+
 public function show($id)
 {
     $job = Job::with('category')->findOrFail($id);

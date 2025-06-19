@@ -85,14 +85,19 @@
                         <span>Job ID: #{{ $job->id }}</span>
                     </div>
                     @auth
-                        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" class="mt-2" onsubmit="return confirm('Are you sure you want to delete this job?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700">
-                                Delete
-                            </button>
-                        </form>
-                    @endauth
+    @php $user = Auth::user(); @endphp
+
+    @if($user->role === 'admin' || $user->role === 'employer')
+        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-red-600 hover:text-red-800 font-semibold">
+                Delete
+            </button>
+        </form>
+    @endif
+@endauth
+
                 </div>
             @empty
                 <div class="job-card p-8 text-center border border-indigo-100">
