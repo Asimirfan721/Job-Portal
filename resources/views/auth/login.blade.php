@@ -44,4 +44,12 @@
             </x-primary-button>
         </div>
     </form>
+
+    <div class="flex justify-center mt-6">
+        <a href="{{ route('register') }}">
+            <button type="button" class="bg-gradient-to-r from-indigo-500 to-blue-400 text-white px-5 py-2 rounded-lg font-semibold shadow hover:from-indigo-600 hover:to-blue-500 transition">
+                Register
+            </button>
+        </a>
+    </div>
 </x-guest-layout>
