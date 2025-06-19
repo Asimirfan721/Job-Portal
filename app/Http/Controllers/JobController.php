@@ -5,6 +5,7 @@ use App\Models\Job;
 use App\Models\Category; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Application; // Assuming you have an Application model
  
 
 class JobController extends Controller
@@ -57,11 +58,25 @@ public function submitApplication(Request $request, $id)
         'name' => 'required',
         'email' => 'required|email',
         'resume' => 'required|mimes:pdf,doc,docx|max:2048',
+        'expected_salary' => 'nullable|numeric',
+        'previous_salary' => 'nullable|numeric',
+        'experience_months' => 'nullable|integer',
+        'reason_to_switch' => 'nullable|string',
     ]);
 
-    $resumePath = $request->file('resume')->store('resumes');
+    $resumePath = $request->file('resume')->store('resumes', 'public');
 
-    // Save to DB or send email — for now, just show success
+    Application::create([
+        'job_id' => $id,
+        'name' => $request->name,
+        'email' => $request->email,
+        'resume' => $resumePath,
+        'expected_salary' => $request->expected_salary,
+        'previous_salary' => $request->previous_salary,
+        'experience_months' => $request->experience_months,
+        'reason_to_switch' => $request->reason_to_switch,
+    ]);
+
     return back()->with('success', 'Application submitted successfully!');
 }
 
