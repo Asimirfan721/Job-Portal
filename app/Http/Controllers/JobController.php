@@ -95,7 +95,7 @@ public function submitApplication(Request $request, $id)
         'reason_to_switch' => $request->reason_to_switch,
     ]);
 
-    return back()->with('success', 'Application submitted successfully!');
+    return redirect()->route('applications.mine')->with('success', 'Application submitted successfully!');
 }
 
 
