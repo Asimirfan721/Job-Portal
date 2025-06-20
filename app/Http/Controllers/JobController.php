@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Models\Category; 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Application; // Assuming you have an Application model
@@ -83,6 +84,7 @@ public function submitApplication(Request $request, $id)
 
     Application::create([
         'job_id' => $id,
+         'user_id' => Auth::id(), // save current user's ID
         'name' => $request->name,
         'email' => $request->email,
         'resume' => $resumePath,
@@ -96,6 +98,14 @@ public function submitApplication(Request $request, $id)
 }
 
 
+public function myApplications()
+{
+    $applications = Application::with('job')
+        ->where('user_id', Auth::id())
+        ->latest()
+        ->get();
 
+    return view('applications.mine', compact('applications'));
+}
 
 }

@@ -29,9 +29,13 @@
                         <a href="{{ route('jobs.create') }}" class="text-indigo-700 font-semibold hover:underline">Post a Job</a>
                     @endif
 
-                    @if(Auth::user()->role === 'job_seeker')
-                        <a href="/my-applications" class="text-indigo-700 font-semibold hover:underline">My Applications</a>
-                    @endif
+                   @auth
+    @if(auth()->user()->role === 'job_seeker')
+        <a href="{{ route('applications.mine') }}" class="text-indigo-600 font-semibold ml-4">
+            My Applications
+        </a>
+    @endif
+@endauth
                 </nav>
             @endauth
 

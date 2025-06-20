@@ -28,14 +28,15 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/jobs/{id}/apply', [JobController::class, 'submitApplication'])->name('applications.submit');
   Route::get('/jobs/{id}/apply', [JobController::class, 'apply'])->name('jobs.apply');
 
-
+  
 });
+Route::get('/my-applications', [JobController::class, 'myApplications'])->middleware('auth')->name('applications.mine');
 
  
-// Only admin can access
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin-panel', [JObController::class, 'index']);
+Route::middleware(['auth', 'role:job_seeker'])->group(function () {
+    Route::get('/my-applications', [JobController::class, 'myApplications'])->name('applications.mine');
 });
+
 
 // Admin and Employer
 Route::middleware(['auth', 'role:admin,employer'])->group(function () {
