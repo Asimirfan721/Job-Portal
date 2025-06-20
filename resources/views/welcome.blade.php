@@ -99,9 +99,14 @@
                                     Delete
                                 </button>
                             </form>
+                           
                         @endif
                     @endauth
+                    <div class="text-sm text-gray-500 text-right">
+    Posted By: {{ $job->user->name ?? 'Unknown' }}
+</div>
                 </div>
+                
             @empty
                 <div class="job-card p-8 text-center border border-indigo-100">
                     <p class="text-indigo-400 text-lg">No job postings yet. Be the first to <a href="{{ route('jobs.create') }}" class="text-indigo-600 underline font-semibold">post a job</a>!</p>

@@ -13,6 +13,7 @@ class JobController extends Controller
     public function create()
 {
     $categories = Category::all();
+    $jobs = Job::with('user', 'category')->latest()->get();
     return view('jobs.create', compact('categories'));
 }
 
