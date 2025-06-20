@@ -46,11 +46,16 @@
                         <a href="{{ url('/dashboard') }}" class="px-5 py-2 rounded-lg font-medium text-indigo-700 border border-indigo-200 hover:bg-indigo-50 transition">
                             Dashboard
                         </a>
-                        <a href="{{ route('jobs.create') }}">
-                            <button class="bg-gradient-to-r from-indigo-500 to-blue-400 text-white px-5 py-2 rounded-lg font-semibold shadow hover:from-indigo-600 hover:to-blue-500 transition">
-                                Post a Job
-                            </button>
-                        </a>
+                      @auth
+    @if(auth()->user()->role === 'employer' || auth()->user()->role === 'admin')
+        <a href="{{ route('jobs.create') }}">
+            <button class="bg-gradient-to-r from-indigo-500 to-blue-400 text-white px-5 py-2 rounded-lg font-semibold shadow hover:from-indigo-600 hover:to-blue-500 transition">
+                Post a Job
+            </button>
+        </a>
+    @endif
+@endauth
+
                     @endauth
                 </nav>
             @endif
