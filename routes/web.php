@@ -33,10 +33,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/my-applications', [JobController::class, 'myApplications'])->middleware('auth')->name('applications.mine');
 
  
-Route::middleware(['auth', 'role:job_seeker'])->group(function () {
-    Route::get('/my-applications', [JobController::class, 'myApplications'])->name('applications.mine');
-});
-
+ 
 
 // Admin and Employer
 Route::middleware(['auth', 'role:admin,employer'])->group(function () {
@@ -44,10 +41,7 @@ Route::middleware(['auth', 'role:admin,employer'])->group(function () {
     Route::post('/post-job', [JobController::class, 'store'])->name('jobs.store');
 });
 
-// Only Job Seekers
-Route::middleware(['auth', 'role:job_seeker'])->group(function () {
-    Route::get('/my-applications', [JobController::class, 'index']);
-});
+ 
 
 
 require __DIR__.'/auth.php';

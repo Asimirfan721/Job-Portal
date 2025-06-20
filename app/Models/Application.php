@@ -18,12 +18,13 @@ class Application extends Model
         'experience_months',
         'reason_to_switch',
     ];
+     public function user()
+{
+    return $this->belongsTo(User::class);
+}
     public function job()
     {
         return $this->belongsTo(Job::class);
     }
-    public function user()
-{
-    return $this->belongsTo(User::class);
-}
+   
 }
