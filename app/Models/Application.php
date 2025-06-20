@@ -10,6 +10,7 @@ class Application extends Model
 
     protected $fillable = [
         'job_id',
+        'user_id', // ✅ Add this line to allow mass assignment
         'name',
         'email',
         'resume',
