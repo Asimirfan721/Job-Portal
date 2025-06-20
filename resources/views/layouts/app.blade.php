@@ -34,6 +34,11 @@
         <a href="{{ route('applications.mine') }}" class="text-indigo-600 font-semibold ml-4">
             My Applications
         </a>
+        <a href="{{ url('/') }}">
+    <button class="bg-gradient-to-r from-indigo-500 to-blue-400 text-white px-5 py-2 rounded-lg font-semibold shadow hover:from-indigo-600 hover:to-blue-500 transition">
+        Home
+    </button>
+</a>
     @endif
 @endauth
                 </nav>
