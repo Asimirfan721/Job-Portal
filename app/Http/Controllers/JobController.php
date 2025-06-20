@@ -81,6 +81,7 @@ public function submitApplication(Request $request, $id)
     ]);
 
     $resumePath = $request->file('resume')->store('resumes', 'public');
+    
 
     Application::create([
         'job_id' => $id,

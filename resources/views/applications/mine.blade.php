@@ -17,7 +17,14 @@
                 <li><strong>Previous Salary:</strong> {{ $app->previous_salary }}</li>
                 <li><strong>Experience:</strong> {{ $app->experience_months }} months</li>
                 <li><strong>Reason to Switch:</strong> {{ $app->reason_to_switch }}</li>
-                <li><strong>Resume:</strong> <a href="{{ asset('storage/' . $app->resume) }}" target="_blank" class="text-blue-500 underline">View Resume</a></li>
+               <li><strong>Resume:</strong> 
+  <a href="{{ asset('storage/' . $app->resume) }}" 
+     target="_blank" 
+     class="text-blue-500 underline" 
+     download>
+     Download Resume
+  </a>
+</li>
             </ul>
         </div>
     @empty
