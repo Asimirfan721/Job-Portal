@@ -9,9 +9,12 @@
     <p class="text-sm text-gray-400 mt-4">Posted on: {{ $job->created_at->format('d M, Y') }}</p>
 
     <div class="mt-6">
-        <a href="{{ route('jobs.apply', $job->id) }}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
-            Apply Now
-        </a>
+       @auth
+    @if(auth()->user()->role === 'job_seeker')
+        <a href="{{ route('jobs.apply', $job->id) }}" class="btn btn-primary">Apply</a>
+    @endif
+@endauth
+
     </div>
 </div>
 @endsection
